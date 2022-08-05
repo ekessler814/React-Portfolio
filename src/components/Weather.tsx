@@ -72,7 +72,7 @@ class WeatherPanel extends Component<any, any> {
 
 class HeaderRow extends Component<any, any> {
   render() {
-    const { onHeaderClick, locations, selected } = this.props;
+    const { onHeaderClick, locations, selected, loaded } = this.props;
 
     const headerSelections = locations.map((loc: string) => {
       const style: any = {};
@@ -84,7 +84,7 @@ class HeaderRow extends Component<any, any> {
       return (
         <div
           className="headerText"
-          onClick={() => onHeaderClick(loc[0])}
+          onClick={() => onHeaderClick(loaded, loc[0])}
           style={style}
           key={"header_" + loc}
         >
@@ -112,6 +112,7 @@ class Weather extends Component<any, any> {
       selected: "",
       fetching: false,
       loaded: false,
+      initialLoad: false,
       dateInfo: {
         today: baseDate.toISOString().slice(0, 10),
         dayOfWeek: baseDate.getDay(),
@@ -120,7 +121,12 @@ class Weather extends Component<any, any> {
     };
   }
 
-  onHeaderClick = (loc: any) => {
+  onHeaderClick = (loaded: any, loc: any) => {
+
+    if (!loaded) {
+      debugger
+      return
+    }
     this.setState({
       ...this.state,
       selected: loc,
@@ -149,9 +155,11 @@ class Weather extends Component<any, any> {
     fetch(getUrl(false))
       .then((response) => response.json())
       .then((data) => {
+
         fetch(getUrl(true))
           .then((inner_response) => inner_response.json())
           .then((inner_data) => {
+
             this.setState({
               ...this.state,
               fetchedForecast: inner_data,
@@ -181,6 +189,7 @@ class Weather extends Component<any, any> {
           );
           this.setState({
             ...this.state,
+            initialLoad: true,
             fetchedLocations: [...this.state.fetchedLocations, found],
           });
         });
@@ -192,8 +201,9 @@ class Weather extends Component<any, any> {
       fetchedForecast,
       fetchedWeather,
       fetching,
-      loaded,
+      initialLoad,
       dateInfo,
+      loaded,
     } = this.state;
 
     if (!key) {
@@ -205,6 +215,7 @@ class Weather extends Component<any, any> {
         className="panelContainer"
       >
         <HeaderRow
+          loaded={initialLoad}
           selected={this.state.selected}
           locations={this.state.locations}
           onHeaderClick={this.onHeaderClick}
