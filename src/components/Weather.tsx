@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ForecastWeather, CurrentWeather } from "./WeatherCells";
 import "./Weather.css";
 
-const key = process.env.WEATHER_API_KEY
+const key = process.env.REACT_APP_WEATHER_API_KEY
 
 class WeatherPanel extends Component<any, any> {
   renderForecast() {
