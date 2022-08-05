@@ -1,0 +1,132 @@
+// constants
+@calm-blue: #f0f9fd;
+
+// page background
+html,
+body,
+#root {
+  height: 100%;
+  background-color: @calm-blue;
+}
+
+// mixins
+// mixin for text used in app
+.text_mixin(@size, @margin-top: 0, @margin-bottom: 0) {
+  letter-spacing: 1px;
+  font-weight: lighter;
+  font-size: @size;
+  margin-top: @margin-top;
+  margin-bottom: @margin-bottom;
+}
+// mixin for commonly used display:flex, flex-direction:row combination
+.flexrow_mixin() {
+  display: flex;
+  flex-direction: row;
+}
+// mixin for commonly used display:flex, flex-direction:column combination
+.flexcolumn_mixin() {
+  display: flex;
+  flex-direction: column;
+}
+.max_dimension_mixin() {
+  width: 100%;
+  height: 100%;
+}
+// end mixins
+
+// text classes
+// text that says today/tonight
+.todayText {
+  .text_mixin(1.75rem, 30px, 20px);
+}
+// text that asks user to select location at start
+.locationText {
+  .text_mixin(1.75rem, 30px, 30px);
+}
+//text denoting the day of the week
+.dayText {
+  .text_mixin(1.3rem, 10px);
+}
+// text denoting weather for current day
+.weatherText {
+  margin-bottom: 40px;
+  font-size: 1.75rem;
+  font-weight: lighter;
+}
+// text denoting temperature for current day
+.tempText {
+  font-family: gill sans, sans-serif;
+  font-size: 3.25rem;
+  font-weight: bold;
+}
+// text denoting temperature for forecasted days
+.smallTempText {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+// text for the city selector
+.headerText {
+  .text_mixin(1.75rem);
+  cursor: pointer;
+}
+// end text classes
+
+// icon classes
+// icon for today's weather
+.mainWeatherIcon {
+  height: 100px;
+  width: 100px;
+}
+// icon for forecasted weather
+.smallWeatherIcon {
+  height: 75px;
+  width: 75px;
+}
+// flex container for icon
+.iconRowWeather {
+  .flexrow_mixin();
+}
+// flex container for icon
+.iconColumnWeather {
+  .flexcolumn_mixin();
+}
+// end icon classes
+
+// containers
+// container for panel section
+.panelContainer {
+  .flexcolumn_mixin();
+  padding: 20px;
+  align-items: center;
+}
+// container for contents of panel
+.weatherPanel {
+  .flexcolumn_mixin();
+  width: 100%;
+  justify-content: flex-start;
+  border: 5px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px lightblue;
+  max-width: 700px;
+}
+// container for header
+.headerRow {
+  .flexrow_mixin();
+  width: 100%;
+  max-width: 700px;
+  padding-bottom: 30px;
+  align-items: center;
+  justify-content: space-around;
+}
+// container for row of weather cells
+.weatherRow {
+  justify-content: center;
+  .flexrow_mixin();
+}
+// container for individual weather cell
+.weatherCell {
+  .flexcolumn_mixin();
+  width: 100%;
+  align-items: center;
+}
+// end container classes
