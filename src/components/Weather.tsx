@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ForecastWeather, CurrentWeather } from "./WeatherCells";
 import "./Weather.css";
 
-const key = "";
+const key = process.env.WEATHER_API_KEY
 
 class WeatherPanel extends Component<any, any> {
   renderForecast() {
@@ -164,6 +164,9 @@ class Weather extends Component<any, any> {
   };
 
   componentDidMount() {
+    if (!key) {
+      return
+    }
     this.state.locations.forEach((place: string) => {
       const url =
         "https://api.openweathermap.org/geo/1.0/direct?q=" +

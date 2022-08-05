@@ -1,3 +1,5 @@
+
+// icons from https://github.com/basmilius/weather-icons
 import clearDay from "./icons/clear-day.png";
 import clearNight from "./icons/clear-night.png";
 import cloudy from "./icons/cloudy.png";
@@ -13,6 +15,11 @@ import thunderstormsDay from "./icons/thunderstorms-day.png";
 import thunderstormsNight from "./icons/thunderstorms-night.png";
 import windAlert from "./icons/wind-alert.png";
 
+/* function for mapping weather conditons from OpenWeatherMap
+to corresponding png icon.  Assumes input will be given
+in the format Rain_day with _day or _night appended to condition.
+If it cannot find a match for day/night it removes the appended
+_day/_night and matches that instead */
 const weatherMapper = (input: string) => {
   const mapping: any = {
     Thunderstorm_day: thunderstormsDay,
@@ -40,6 +47,8 @@ const weatherMapper = (input: string) => {
   return access;
 };
 
+/* Simple function that maps a dateTime integer for
+day of the week to an abbrevited text representation */
 const getDayOfWeek = (dayNum: number) => {
   if (dayNum === 0) {
     return "Sun";
@@ -64,7 +73,9 @@ const getDayOfWeek = (dayNum: number) => {
   }
 };
 
-// grab highest temp
+/* We are showing the highest temperature of the day for forecasted
+weather conditions. This function uses reduce to  return the forecast
+associated with the highest temperature */
 const searchForecast = (forecast, joinedDay) => {
     return forecast.list.reduce(
     (acc: any, iter: any) => {
@@ -79,8 +90,9 @@ const searchForecast = (forecast, joinedDay) => {
   );
 }
 
+/* This function allows us to increment a string in the format
+2022-08-05 by a single day which is useful for searching for forecast data */
 const incrementDay = (today, dayIncrease) => {
-
       const splitToday = today.split("-");
       let incrementedDay = Number(splitToday[2]) + dayIncrease;
       incrementedDay =
@@ -89,8 +101,10 @@ const incrementDay = (today, dayIncrease) => {
       return splitToday.join("-");
 }
 
+/* This function increases an integer representing the day of the
+day of the week by one. If it is greater than 6 after this incrementation
+roll it over to 0, 1, or 2 */
 const accountForDayRollover = (dayOfWeek, dayIncrease) => {
-
   let newDay = dayOfWeek + dayIncrease;
   const testlist = [7, 8, 9];
   testlist.forEach((iter: number, idx: number) => {
@@ -99,7 +113,6 @@ const accountForDayRollover = (dayOfWeek, dayIncrease) => {
     }
   });
   return newDay
-
 }
 
 export { weatherMapper, getDayOfWeek, searchForecast, incrementDay, accountForDayRollover }
