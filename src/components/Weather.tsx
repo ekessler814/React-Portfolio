@@ -104,15 +104,15 @@ class Weather extends Component<any, any> {
     const isDayTime = hours > 6 && hours < 20;
     this.state = {
       locations: [
-        ["Paris", "Ile-de-France"],
-        ["Calgary", "Alberta"],
-        ["Miami", "Florida"],
+        ["Paris", "FR"],
+        ["Calgary", "CA"],
+        ["Miami", "US"],
       ],
       fetchedLocations: [],
       selected: "",
       fetching: false,
       loaded: false,
-      initialLoad: false,
+      initialLoad: 0,
       dateInfo: {
         today: baseDate.toISOString().slice(0, 10),
         dayOfWeek: baseDate.getDay(),
@@ -124,7 +124,6 @@ class Weather extends Component<any, any> {
   onHeaderClick = (loaded: any, loc: any) => {
 
     if (!loaded) {
-      debugger
       return
     }
     this.setState({
@@ -175,25 +174,38 @@ class Weather extends Component<any, any> {
     if (!key) {
       return
     }
-    this.state.locations.forEach((place: string) => {
+
+    const promises = this.state.locations.map((place: string) => {
       const url =
         "https://api.openweathermap.org/geo/1.0/direct?q=" +
         place[0] +
+        ',' + place[1] +
         "&limit=5&appid=" +
         key;
-      fetch(url)
+
+      return fetch(url)
         .then((response) => response.json())
-        .then((data) => {
-          const found = data.find(
-            (iter: any) => iter.name === place[0] && iter.state === place[1]
-          );
-          this.setState({
-            ...this.state,
-            initialLoad: true,
-            fetchedLocations: [...this.state.fetchedLocations, found],
-          });
-        });
-    });
+
+    })
+
+
+
+    Promise.all(promises).then(results => {
+      const fetchedLocations = results.map((data) => {
+
+            // grab first element since we queried by country code
+            const found = data[0]
+            return found
+      })
+      this.setState({
+        ...this.state,
+        initialLoad: true,
+        fetchedLocations,
+      });
+    })
+
+
+
   }
 
   render() {
