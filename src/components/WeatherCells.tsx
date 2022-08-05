@@ -48,11 +48,7 @@ class ForecastWeather extends Component<any, any> {
 
 class CurrentWeather extends Component<any, any> {
   render() {
-    const { fetchedWeather, fetching, loaded, isDayTime } = this.props;
-
-    if (fetching) {
-      return <div className="todayText">Loading...</div>;
-    }
+    const { fetchedWeather, loaded, isDayTime } = this.props;
 
     if (!loaded) {
       return <div className="locationText">Select Location</div>;

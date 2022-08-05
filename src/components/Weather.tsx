@@ -6,8 +6,7 @@ const key = "";
 
 class WeatherPanel extends Component<any, any> {
   renderForecast() {
-    const { fetchedForecast, dateInfo, fetching, loaded } = this.props;
-    const load_or_fetch = fetching || !loaded;
+    const { fetchedForecast, dateInfo } = this.props;
 
     return (
       <div style={{}} className="weatherRow">
@@ -16,7 +15,7 @@ class WeatherPanel extends Component<any, any> {
             dateInfo={dateInfo}
             dayIncrease={1}
             forecast={fetchedForecast}
-            load={load_or_fetch}
+            load={false}
           />
         </div>
 
@@ -25,7 +24,7 @@ class WeatherPanel extends Component<any, any> {
             dateInfo={dateInfo}
             dayIncrease={2}
             forecast={fetchedForecast}
-            load={load_or_fetch}
+            load={false}
           />
         </div>
         <div style={{ borderRight: "5px solid white" }} className="weatherCell">
@@ -33,7 +32,7 @@ class WeatherPanel extends Component<any, any> {
             dateInfo={dateInfo}
             dayIncrease={3}
             forecast={fetchedForecast}
-            load={load_or_fetch}
+            load={false}
           />
         </div>
         <div className="weatherCell">
@@ -41,7 +40,7 @@ class WeatherPanel extends Component<any, any> {
             dateInfo={dateInfo}
             dayIncrease={4}
             forecast={fetchedForecast}
-            load={load_or_fetch}
+            load={false}
           />
         </div>
       </div>
@@ -49,12 +48,11 @@ class WeatherPanel extends Component<any, any> {
   }
   render() {
     const { fetchedWeather, fetching, loaded, dateInfo } = this.props;
-    const load_or_fetch = fetching || !loaded;
     return (
       <div className="weatherPanel">
         <div
           style={{
-            ...(!load_or_fetch ? { borderBottom: "5px solid white" } : {}),
+            ...(loaded? { borderBottom: "5px solid white" } : {}),
           }}
           className="weatherRow"
         >
@@ -66,7 +64,7 @@ class WeatherPanel extends Component<any, any> {
           />
         </div>
 
-        {load_or_fetch ? "" : this.renderForecast()}
+        {!loaded ? "" : this.renderForecast()}
       </div>
     );
   }
