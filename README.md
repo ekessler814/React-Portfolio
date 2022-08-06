@@ -39,6 +39,7 @@ This project showcases the following technologies
 - React class components (as opposed to hooks era React functional components)
 - Typescript
 - Template Literals
+- Linting with ESLint and formatting with Atom-Prettier
 - Concurrent fetching using Promises.All() to OpenWeatherMap for geo, current weather, and forecasted weather data
 - ES6 functions (reduce, find, forEach, map), destucturing, spread operator
 - Responsive design for smartphone, tablet and PC in horizontal and vertical orientation utilizing flexbox
