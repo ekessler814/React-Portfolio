@@ -106,7 +106,7 @@ day of the week by one. If it is greater than 6 after this incrementation
 roll it over to 0, 1, or 2 */
 const accountForDayRollover = (dayOfWeek, dayIncrease) => {
   let newDay = dayOfWeek + dayIncrease;
-  const testlist = [7, 8, 9];
+  const testlist = [7, 8, 9, 10, 11, 12];
   testlist.forEach((iter: number, idx: number) => {
     if (newDay === iter) {
       newDay = idx;
