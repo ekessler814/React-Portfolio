@@ -34,7 +34,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## Project Notes
 This is a simple weather application pulling from OpenWeatherMap API displaying the current and four day forecast for three cities in a visually appealing format.
 
-This project showcases the following technologies
+This project showcases the following features
 - LESS CSS preprocessing using variables and mixins
 - React class components (as opposed to hooks era React functional components)
 - Typescript
