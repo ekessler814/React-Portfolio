@@ -60,8 +60,9 @@ class Weather extends Component<any, any> {
       fetchedLocations: [],
       // selected city
       selected: "",
-      // flag for when network calls are occurring
-      fetching: false,
+      /* flag for when network calls are occurring, initialize
+      to true to avoid having to setState for initial fetch*/
+      fetching: true,
       // flag for when forecast data has been fetched
       loaded: false,
       // flag for when base location data has been fetched
