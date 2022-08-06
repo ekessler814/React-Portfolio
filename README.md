@@ -31,7 +31,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Project notes
+## Project Notes
 This is a simple weather application pulling from OpenWeatherMap API displaying the current and four day forecast for three cities in a visually appealing format.
 
 This project showcases the following technologies
