@@ -45,7 +45,7 @@ This project showcases the following technologies
 - Responsive design for smartphone, tablet and PC in horizontal and vertical orientation utilizing flexbox
 - Visually appealing design utilizing free icons from https://github.com/basmilius/weather-icons
 - Day/night cycle for today/tonight text and clear/thunderstorm icons
-- Broken up layout with easy to read format and commented code
+- Detailed commented code; broken up layout with easy to read format 
 - Cities can be updated dynamically simply by updating array with city name and country code
 - Stable and bug free (knock on wood) design
 - Built fast and concise!
