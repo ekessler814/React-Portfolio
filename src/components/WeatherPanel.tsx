@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { ForecastWeather, CurrentWeather } from "./WeatherCells";
+import './Weather.css'
+
 
 // component for rendering inner weather cells
 class WeatherPanel extends Component<any, any> {
