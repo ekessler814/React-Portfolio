@@ -9,28 +9,32 @@ import {
 } from "../logic";
 
 class ForecastWeather extends Component<any, any> {
+
   render() {
-    const { dayIncrease, forecast, load, dateInfo } = this.props;
+
+    const { dayIncrease, forecast, dateInfo } = this.props;
     const { today, dayOfWeek } = dateInfo;
 
-    if (load || !forecast) {
+    // don't render unless we have fetched forecast data
+    if (!forecast) {
       return;
     }
 
+    /* this section increments our current day by one, formats it and grabs
+    associated forecast data */
     const joinedDay = incrementDay(today, dayIncrease);
     const noonForecast = searchForecast(forecast, joinedDay);
     const newDay = accountForDayRollover(dayOfWeek, dayIncrease);
     const formattedDay = getDayOfWeek(newDay);
 
+    /* we aren't dealing with the day/night cycle for forecast data
+    so we append _day to our icon query. Weather only ever seems
+    to contain a single value hence accessing weather[0] */
     const iconComponent = weatherMapper(noonForecast.weather[0].main + "_day");
 
     return (
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+        className="forecastContainer"
       >
         <div className="dayText">{formattedDay}</div>
         <img
@@ -39,6 +43,7 @@ class ForecastWeather extends Component<any, any> {
           alt={noonForecast.weather[0].main}
         />
         <div className="smallTempText">
+          {/* round our temp to single digit and add degree symbol */}
           {Math.round(noonForecast.main.temp) + "°"}
         </div>
       </div>
@@ -47,16 +52,20 @@ class ForecastWeather extends Component<any, any> {
 }
 
 class CurrentWeather extends Component<any, any> {
+
   render() {
+
     const { fetchedWeather, loaded, isDayTime } = this.props;
 
+    // if we don't have weather/forecast data then render simple div
     if (!loaded) {
       return <div className="locationText">Select Location</div>;
     }
-
+    // get icon determined by day/night cycle and weather tyle
     const iconComponent = weatherMapper(
       fetchedWeather.weather[0].main + (isDayTime ? "_day" : "_night")
     );
+
     return (
       <div className="weatherCell">
         <div className="todayText">{isDayTime ? "Today" : "Tonight"}</div>
@@ -69,6 +78,7 @@ class CurrentWeather extends Component<any, any> {
 
           <div className="iconColumnWeather">
             <div className="tempText">
+              {/* round our temp to single digit and add degree symbol */}
               {Math.round(fetchedWeather.main.temp) + "°"}
             </div>
             <div className="weatherText">{fetchedWeather.weather[0].main}</div>

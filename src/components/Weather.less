@@ -83,6 +83,9 @@ body,
   height: 75px;
   width: 75px;
 }
+// end icon classes
+
+// containers
 // flex container for icon
 .iconRowWeather {
   .flexrow_mixin();
@@ -91,13 +94,14 @@ body,
 .iconColumnWeather {
   .flexcolumn_mixin();
 }
-// end icon classes
-
-// containers
 // container for panel section
 .panelContainer {
   .flexcolumn_mixin();
   padding: 20px;
+  align-items: center;
+}
+.forecastContainer {
+  .flexcolumn_mixin();
   align-items: center;
 }
 // container for contents of panel
