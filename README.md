@@ -40,7 +40,7 @@ This project showcases the following technologies
 - Typescript
 - Template Literals
 - Linting with ESLint and formatting with Atom-Prettier
-- Concurrent fetching using Promises.All() to OpenWeatherMap for geo, current weather, and forecasted weather data
+- Concurrent fetching using Promise.All() to OpenWeatherMap for geo, current weather, and forecasted weather data
 - ES6 functions (reduce, find, forEach, map), destucturing, spread operator
 - Responsive design for smartphone, tablet and PC in horizontal and vertical orientation utilizing flexbox
 - Visually appealing design utilizing free icons from https://github.com/basmilius/weather-icons
