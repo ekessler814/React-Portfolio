@@ -39,12 +39,13 @@ This project showcases the following technologies
 - React class components (as opposed to hooks era React functional components)
 - Typescript
 - Template Literals
-- Concurrent fetching using Promises.All() to OpenWeatherMap for geo, current Weather, and forecasted weather data
+- Concurrent fetching using Promises.All() to OpenWeatherMap for geo, current weather, and forecasted weather data
 - ES6 functions (reduce, find, forEach, map), destucturing, spread operator
-- Responsive Design for smartphone and PC utilizing flexbox
+- Responsive design for smartphone, tablet and PC in horizontal and vertical orientation utilizing flexbox
 - Visually appealing design utilizing free icons from https://github.com/basmilius/weather-icons
-- Day/night cycle for Today/Tonight text and Clear and Thunderstorm icons
+- Day/night cycle for today/tonight text and clear/thunderstorm icons
 - Broken up layout with easy to read format and commented code
+- Cities can be updated dynamically simply by updating array with city name and country code
 - Stable and bug free (knock on wood) design
 - Built fast and concise!
 - Hosting on Netlify
