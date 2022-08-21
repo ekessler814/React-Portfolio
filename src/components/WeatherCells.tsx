@@ -54,7 +54,7 @@ const CurrentWeather = ({ fetchedWeather, loaded, isDayTime } : any ) => {
 
     // if we don't have weather/forecast data then render simple div
     if (!loaded) {
-      return <div className="locationText">Select Location</div>;
+      return <div className="locationText">Loading...</div>;
     }
     // get icon determined by day/night cycle and weather tyle
     const iconComponent = weatherMapper(

@@ -79,7 +79,7 @@ const initialState = {
   // array for fetched geo location data from OpenWeatherMap
   fetchedLocations: typedArr,
   // selected city
-  selected: "",
+  selected: "Calgary",
   /* flag for when network calls are occurring, initialize
     to true to avoid having to setState for initial fetch*/
   fetching: false,

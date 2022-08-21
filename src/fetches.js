@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 const key = process.env.REACT_APP_WEATHER_API_KEY;
 
-const useHeaderFetch = ({ fetching, fetchedLocations, selected, setFetch }: any) => {
-
+const useHeaderFetch = ({
+  fetching,
+  fetchedLocations,
+  selected,
+  setFetch,
+}: any) => {
   const [state, setState] = useState({
     fetched: false,
-  })
+  });
   useEffect(() => {
     if (!fetching || !key) {
       return;
@@ -36,27 +40,27 @@ const useHeaderFetch = ({ fetching, fetchedLocations, selected, setFetch }: any)
         fetchedWeather: results[0],
         fetchedForecast: results[1],
         fetched: true,
-
       });
-      setFetch()
+      setFetch();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetching]);
 
-  return state
-
+  return state;
 };
 
-
-const useInitialFetch = ({state, setState} : any) => {
+const useInitialFetch = ({ setLoaded, initialLoad, locations }: any) => {
+  const [state, setState] = useState({
+    fetched: false,
+  });
 
   useEffect(() => {
     // dont execute fetches without API key
-    if (!key || state.initialLoad) {
+    if (!key || initialLoad) {
       return;
     }
 
-    const promises = state.locations.map((place: any) => {
+    const promises = locations.map((place: any) => {
       // template strings are an efficient way of building urls!
       const url = `https://api.openweathermap.org/geo/1.0/direct?q=${place[0]},${place[1]}&limit=5&appid=${key}`;
       return fetch(url).then((response) => response.json());
@@ -73,15 +77,15 @@ const useInitialFetch = ({state, setState} : any) => {
       /* this setState will not fire until all of our promises are resolved.
       We want to avoid unnecessary calling of setState such as in a loop */
       setState({
-        ...state,
         // initial load is now complete
-        initialLoad: true,
+        fetched: true,
         fetchedLocations,
       });
+      setLoaded();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.initialLoad]);
+  }, [initialLoad]);
+  return state;
+};
 
-}
-
-export { useInitialFetch, useHeaderFetch, key }
+export { useInitialFetch, useHeaderFetch, key };

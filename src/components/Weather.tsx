@@ -1,12 +1,14 @@
-
 import WeatherPanel from "./WeatherPanel";
 import "./Weather.css";
-import { useState } from 'react'
-import { initialState, dateInfo } from '../logic'
-import { useHeaderFetch, useInitialFetch, key } from '../fetches'
+import { useState, useEffect } from "react";
+import { initialState, dateInfo } from "../logic";
+import { useHeaderFetch, useInitialFetch, key } from "../fetches";
 
-
-const HeaderRow = ({ locations, selected, loaded, state, setState }: any) => {
+const HeaderRow = ({ locations, selected, loaded, setLoc }: any) => {
+  /* this function is for handling clicking a city. We define
+  this on the top level class because we are calling setState
+  here which should not called by child components when using
+  class based React components */
 
   const onHeaderClick = (loaded: any, loc: any) => {
     /* we don't want this action to progress unless forecast data
@@ -15,11 +17,7 @@ const HeaderRow = ({ locations, selected, loaded, state, setState }: any) => {
       return;
     }
     // update selected city and fetching to true while we fetch
-    setState({
-      ...state,
-      selected: loc,
-      fetching: true,
-    });
+    setLoc(loc);
   };
 
   const headerSelections = locations.map((loc: string) => {
@@ -48,27 +46,45 @@ const HeaderRow = ({ locations, selected, loaded, state, setState }: any) => {
   return <div className="headerRow">{headerSelections}</div>;
 };
 
-
 const Weather = () => {
-
-
   const [state, setState] = useState(initialState);
-  /* this function is for handling clicking a city. We define
-  this on the top level class because we are calling setState
-  here which should not called by child components when using
-  class based React components */
 
-  useInitialFetch({state, setState})
+  const { fetched: initialLoad, fetchedLocations }: any = useInitialFetch({
+    initialLoad: state.initialLoad,
+    locations: state.locations,
+    setLoaded: () => {
+      setState({
+        ...state,
+        initialLoad: true,
+      });
+    },
+  });
+  useEffect(() => {
+    if (!initialLoad) {
+      return;
+    }
+    setState({
+      ...state,
+      fetching: true,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialLoad]);
 
-  const { fetching, fetchedLocations, selected }: any = state
+  const { fetching, selected }: any = state;
 
-
-  const { fetchedWeather, fetchedForecast, fetched }: any = useHeaderFetch({
-    fetching, fetchedLocations, selected, setFetch: function () {
+  const {
+    fetchedWeather,
+    fetchedForecast,
+    fetched: locationWeatherFetched,
+  }: any = useHeaderFetch({
+    fetchedLocations,
+    fetching,
+    selected,
+    setFetch: () => {
       setState({
         ...state,
         fetching: false,
-      })
+      });
     },
   });
 
@@ -78,23 +94,26 @@ const Weather = () => {
     return <div style={{ padding: "20px" }}>Missing API Key!!!</div>;
   }
 
-
   return (
-    // this is the outer level container for our app
     <div className="panelContainer">
       {/* city selector row */}
       <HeaderRow
-        loaded={state.initialLoad}
+        loaded={initialLoad}
         selected={state.selected}
         locations={state.locations}
-        setState={setState}
-        state={state}
+        setLoc={(loc: string) => {
+          setState({
+            ...state,
+            selected: loc,
+            fetching: true,
+          });
+        }}
       />
       {/* weather cell panel container */}
       <WeatherPanel
         dateInfo={dateInfo}
         fetching={fetching}
-        loaded={fetched}
+        loaded={locationWeatherFetched}
         fetchedForecast={fetchedForecast}
         fetchedWeather={fetchedWeather}
       />
