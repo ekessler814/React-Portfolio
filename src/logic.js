@@ -1,4 +1,3 @@
-
 // icons from https://github.com/basmilius/weather-icons
 import clearDay from "./icons/clear-day.png";
 import clearNight from "./icons/clear-night.png";
@@ -47,6 +46,49 @@ const weatherMapper = (input: string) => {
   return access;
 };
 
+/* we want the current date so we can determine the days
+  of the week and locate the correct forecasted weather for
+  that day */
+const baseDate = new Date();
+const hours = baseDate.getHours();
+/* TODO this should be based on the selected location,
+  we want to know if it's day or night so we can show day/_night
+  specific icons */
+const isDayTime = hours > 6 && hours < 20;
+const dateInfo: any = {
+  // stripped down string version of today's date
+  today: baseDate.toISOString().slice(0, 10),
+  // integer version of current day of the week
+  dayOfWeek: baseDate.getDay(),
+  // explained above
+  isDayTime,
+};
+
+const typedArr: any[] = [];
+
+const initialState = {
+  fetchedWeather: {},
+  fetchedForecast: {},
+  /* our cities and their country codes. This is completely
+    dynamic and the cities can be changed by changing this array only */
+  locations: [
+    ["Paris", "FR"],
+    ["Calgary", "CA"],
+    ["Miami", "US"],
+  ],
+  // array for fetched geo location data from OpenWeatherMap
+  fetchedLocations: typedArr,
+  // selected city
+  selected: "",
+  /* flag for when network calls are occurring, initialize
+    to true to avoid having to setState for initial fetch*/
+  fetching: false,
+  // flag for when forecast data has been fetched
+  loaded: false,
+  // flag for when base location data has been fetched
+  initialLoad: false,
+};
+
 /* Simple function that maps a dateTime integer for
 day of the week to an abbrevited text representation */
 const getDayOfWeek = (dayNum: number) => {
@@ -77,7 +119,7 @@ const getDayOfWeek = (dayNum: number) => {
 weather conditions. This function uses reduce to  return the forecast
 associated with the highest temperature */
 const searchForecast = (forecast, joinedDay) => {
-    return forecast.list.reduce(
+  return forecast.list.reduce(
     (acc: any, iter: any) => {
       if (joinedDay === iter.dt_txt.split(" ")[0]) {
         if (acc.main.temp < iter.main.temp) {
@@ -88,18 +130,18 @@ const searchForecast = (forecast, joinedDay) => {
     },
     { main: { temp: -50 } }
   );
-}
+};
 
 /* This function allows us to increment a string in the format
 2022-08-05 by a single day which is useful for searching for forecast data */
 const incrementDay = (today, dayIncrease) => {
-      const splitToday = today.split("-");
-      let incrementedDay = Number(splitToday[2]) + dayIncrease;
-      incrementedDay =
-        incrementedDay < 10 ? "0" + incrementedDay : incrementedDay.toString();
-      splitToday[2] = incrementedDay;
-      return splitToday.join("-");
-}
+  const splitToday = today.split("-");
+  let incrementedDay = Number(splitToday[2]) + dayIncrease;
+  incrementedDay =
+    incrementedDay < 10 ? "0" + incrementedDay : incrementedDay.toString();
+  splitToday[2] = incrementedDay;
+  return splitToday.join("-");
+};
 
 /* This function increases an integer representing the day of the
 day of the week by one. If it is greater than 6 after this incrementation
@@ -112,7 +154,15 @@ const accountForDayRollover = (dayOfWeek, dayIncrease) => {
       newDay = idx;
     }
   });
-  return newDay
-}
+  return newDay;
+};
 
-export { weatherMapper, getDayOfWeek, searchForecast, incrementDay, accountForDayRollover }
+export {
+  weatherMapper,
+  getDayOfWeek,
+  searchForecast,
+  incrementDay,
+  accountForDayRollover,
+  initialState,
+  dateInfo,
+};

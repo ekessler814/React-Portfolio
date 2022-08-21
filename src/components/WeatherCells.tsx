@@ -1,6 +1,4 @@
-import React, { Component } from "react";
 import './Weather.css'
-
 import {
   weatherMapper,
   getDayOfWeek,
@@ -9,17 +7,16 @@ import {
   accountForDayRollover,
 } from "../logic";
 
-class ForecastWeather extends Component<any, any> {
+const ForecastWeather = ({ dayIncrease, forecast, dateInfo } : any) => {
 
-  render() {
 
-    const { dayIncrease, forecast, dateInfo } = this.props;
-    const { today, dayOfWeek } = dateInfo;
 
     // don't render unless we have fetched forecast data
     if (!forecast) {
-      return;
+      return <div></div>;
     }
+
+    const { today, dayOfWeek } = dateInfo
 
     /* this section increments our current day by one, formats it and grabs
     associated forecast data */
@@ -49,14 +46,11 @@ class ForecastWeather extends Component<any, any> {
         </div>
       </div>
     );
-  }
+
 }
 
-class CurrentWeather extends Component<any, any> {
+const CurrentWeather = ({ fetchedWeather, loaded, isDayTime } : any ) => {
 
-  render() {
-
-    const { fetchedWeather, loaded, isDayTime } = this.props;
 
     // if we don't have weather/forecast data then render simple div
     if (!loaded) {
@@ -87,7 +81,7 @@ class CurrentWeather extends Component<any, any> {
         </div>
       </div>
     );
-  }
+
 }
 
 export { ForecastWeather, CurrentWeather };
