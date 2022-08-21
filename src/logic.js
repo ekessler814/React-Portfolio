@@ -80,13 +80,10 @@ const initialState = {
   fetchedLocations: typedArr,
   // selected city
   selected: "Calgary",
-  /* flag for when network calls are occurring, initialize
-    to true to avoid having to setState for initial fetch*/
+  // flag for when forecast and current weather calls are occurring
   fetching: false,
   // flag for when forecast data has been fetched
   loaded: false,
-  // flag for when base location data has been fetched
-  initialLoad: false,
 };
 
 /* Simple function that maps a dateTime integer for

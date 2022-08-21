@@ -50,15 +50,9 @@ const Weather = () => {
   const [state, setState] = useState(initialState);
 
   const { fetched: initialLoad, fetchedLocations }: any = useInitialFetch({
-    initialLoad: state.initialLoad,
     locations: state.locations,
-    setLoaded: () => {
-      setState({
-        ...state,
-        initialLoad: true,
-      });
-    },
   });
+
   useEffect(() => {
     if (!initialLoad) {
       return;

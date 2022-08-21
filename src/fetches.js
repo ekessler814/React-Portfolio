@@ -49,14 +49,14 @@ const useHeaderFetch = ({
   return state;
 };
 
-const useInitialFetch = ({ setLoaded, initialLoad, locations }: any) => {
+const useInitialFetch = ({ locations }: any) => {
   const [state, setState] = useState({
     fetched: false,
   });
 
   useEffect(() => {
     // dont execute fetches without API key
-    if (!key || initialLoad) {
+    if (!key) {
       return;
     }
 
@@ -81,10 +81,10 @@ const useInitialFetch = ({ setLoaded, initialLoad, locations }: any) => {
         fetched: true,
         fetchedLocations,
       });
-      setLoaded();
+
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialLoad]);
+  }, []);
   return state;
 };
 
