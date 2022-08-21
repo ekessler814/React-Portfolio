@@ -9,6 +9,7 @@ const useHeaderFetch = ({
 }: any) => {
   const [state, setState] = useState({
     fetched: false,
+    cached: {},
   });
   useEffect(() => {
     if (!fetching || !key) {
@@ -19,6 +20,17 @@ const useHeaderFetch = ({
     const found: any = fetchedLocations.find((iter: any) => {
       return iter.name === selected;
     });
+
+    if (state.cached[found.name]) {
+      setState({
+        fetchedWeather: state.cached[found.name].fetchedWeather,
+        fetchedForecast: state.cached[found.name].fetchedForecast,
+        fetched: true,
+        cached: state.cached,
+      });
+      setFetch();
+      return;
+    }
 
     const getUrl = (forecast: boolean) => {
       // template strings are an efficient way of building urls!
@@ -40,6 +52,13 @@ const useHeaderFetch = ({
         fetchedWeather: results[0],
         fetchedForecast: results[1],
         fetched: true,
+        cached: {
+          ...state.cached,
+          [found.name]: {
+            fetchedWeather: results[0],
+            fetchedForecast: results[1],
+          },
+        },
       });
       setFetch();
     });
@@ -81,7 +100,6 @@ const useInitialFetch = ({ locations }: any) => {
         fetched: true,
         fetchedLocations,
       });
-
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
