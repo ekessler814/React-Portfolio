@@ -162,7 +162,7 @@ const resultStyles: any = {
   teamBorder: (teamNumber: number) => {
     return {
       backgroundColor: teamNumber % 2 === 0 ? "rgb(251 195 21)" : "darkgreen",
-      border: "1px solid grey",
+      borderTop: "2px solid grey",
       borderBottom: "2px solid grey",
       borderLeft: "2px solid grey",
       borderRight: "2px solid grey",
