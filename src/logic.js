@@ -13,7 +13,7 @@ import snow from "./icons/snow.png";
 import thunderstormsDay from "./icons/thunderstorms-day.png";
 import thunderstormsNight from "./icons/thunderstorms-night.png";
 import windAlert from "./icons/wind-alert.png";
-
+import _ from 'lodash'
 /* function for mapping weather conditons from OpenWeatherMap
 to corresponding png icon.  Assumes input will be given
 in the format Rain_day with _day or _night appended to condition.
@@ -65,21 +65,20 @@ const dateInfo: any = {
 };
 
 const typedArr: any[] = [];
-
+const locations =
+    [["Paris", "FR"],
+    ["Calgary", "CA"],
+    ["Miami", "US"]]
 const initialState = {
   fetchedWeather: {},
   fetchedForecast: {},
   /* our cities and their country codes. This is completely
     dynamic and the cities can be changed by changing this array only */
-  locations: [
-    ["Paris", "FR"],
-    ["Calgary", "CA"],
-    ["Miami", "US"],
-  ],
+  locations,
   // array for fetched geo location data from OpenWeatherMap
   fetchedLocations: typedArr,
   // selected city
-  selected: "Calgary",
+  selected: _.first(_.first(_.shuffle(locations))),
   // flag for when forecast and current weather calls are occurring
   fetching: false,
   // flag for when forecast data has been fetched
@@ -153,6 +152,7 @@ const accountForDayRollover = (dayOfWeek, dayIncrease) => {
   });
   return newDay;
 };
+
 
 export {
   weatherMapper,

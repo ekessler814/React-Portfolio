@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Weather from './components/Weather';
+import { TeamShuffle } from './components/TeamShuffle'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +10,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+
     <Weather />
+    <TeamShuffle />
+
   </React.StrictMode>
 );
 

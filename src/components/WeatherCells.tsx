@@ -1,4 +1,5 @@
 import "./Weather.css";
+import _ from 'lodash'
 import {
   weatherMapper,
   getDayOfWeek,
@@ -68,7 +69,7 @@ const CurrentWeather = ({ fetchedWeather, loaded, isDayTime }: any) => {
             {/* round our temp to single digit and add degree symbol */}
             {Math.round(fetchedWeather.main.temp) + "°"}
           </div>
-          <div className="weatherText">{fetchedWeather.weather[0].main}</div>
+          <div className="weatherText">{_.first(fetchedWeather.weather).main}</div>
         </div>
       </div>
     </div>
