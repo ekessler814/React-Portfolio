@@ -195,7 +195,7 @@ const resultStyles: any = {
   textContainer: {
     width: "100%",
     marginBottom: "20px",
-  }
+  },
 };
 
 export { inputShuffleStyles, infoTextStyle, resultStyles };
