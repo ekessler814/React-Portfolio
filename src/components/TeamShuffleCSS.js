@@ -158,6 +158,7 @@ const resultStyles: any = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginBottom: '15px',
   },
   teamBorder: (teamNumber: number) => {
     return {
