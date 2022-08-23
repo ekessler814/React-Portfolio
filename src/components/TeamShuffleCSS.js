@@ -153,6 +153,7 @@ const resultStyles: any = {
     width: "205px",
     height: "200px",
     border: "2px solid grey",
+    borderTop: "0px",
     borderRadius: "10px",
     display: "flex",
     flexDirection: "column",
