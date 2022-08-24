@@ -1,4 +1,4 @@
-import { inputShuffleStyles as styles } from "./TeamShuffleCSS.js";
+import { inputShuffleStyles as styles } from "./teamShuffleCSS.js";
 import { TeamShuffleContext } from "./TeamShuffle";
 import { useContext } from "react";
 import _ from "lodash";

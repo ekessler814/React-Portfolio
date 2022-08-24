@@ -1,5 +1,5 @@
 import WeatherPanel from "./WeatherPanel";
-import "./Weather.css";
+import "./weather.css";
 import { useState, useEffect } from "react";
 import { initialState, dateInfo } from "../logic";
 import { useHeaderFetch, useInitialFetch, key } from "../fetches";

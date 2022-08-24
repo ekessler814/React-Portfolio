@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Weather from './components/Weather';
 import { TeamShuffle } from './components/TeamShuffle'
+import  Calendar from './components/Calendar'
+import ConnectFour from './components/ConnectFour';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -14,6 +16,20 @@ root.render(
     <Weather />
     <TeamShuffle />
 
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        paddingBottom: '50px'
+
+      }}
+    >
+
+    <Calendar />
+    <div style={{width: '50px'}}></div>
+    <ConnectFour />
+    </div>
   </React.StrictMode>
 );
 

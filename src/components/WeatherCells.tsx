@@ -1,4 +1,4 @@
-import "./Weather.css";
+import "./weather.css";
 import _ from 'lodash'
 import {
   weatherMapper,

@@ -1,5 +1,5 @@
 import { ForecastWeather, CurrentWeather } from "./WeatherCells";
-import "./Weather.css";
+import "./weather.css";
 
 // component for rendering inner weather cells
 const WeatherPanel = ({

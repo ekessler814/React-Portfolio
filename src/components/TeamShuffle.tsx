@@ -1,4 +1,3 @@
-import "./Weather.css";
 import { useState, createContext, useEffect } from "react";
 import InputContainer from "./InputShuffle";
 import ControllerShuffle from "./ControllerShuffle";
@@ -86,7 +85,7 @@ const TeamShuffle = () => {
             paddingBottom: "50px",
             paddingTop: "50px",
             width: "85%",
-            maxWidth: '1500px',
+            maxWidth: "1500px",
           }}
         >
           <InputContainer />

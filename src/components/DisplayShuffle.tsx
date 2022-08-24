@@ -1,4 +1,4 @@
-import { inputShuffleStyles, resultStyles as style } from "./TeamShuffleCSS";
+import { inputShuffleStyles, resultStyles as style } from "./teamShuffleCSS";
 
 const TeamCell = ({ teamNumber, team }: any) => {
   const members = team.map((iter: any) => {
@@ -25,9 +25,7 @@ const TeamTable = ({ run }: any) => {
 const DisplayTeams = ({ run }: any) => {
   return (
     <div style={inputShuffleStyles.outerContainer}>
-      <div
-        style={style.textContainer}
-      >
+      <div style={style.textContainer}>
         <h1 style={{ margin: "0px" }}>3. Result</h1>
       </div>
 

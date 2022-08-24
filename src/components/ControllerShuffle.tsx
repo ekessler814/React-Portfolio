@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { TeamShuffleContext } from "./TeamShuffle";
-import { infoTextStyle } from "./TeamShuffleCSS";
+import { infoTextStyle } from "./teamShuffleCSS";
 
 const {
   container,
